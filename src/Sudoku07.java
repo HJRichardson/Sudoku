@@ -21,14 +21,6 @@ public class Sudoku07 {
                 "Select an action [1-7]: ");
     }
 
-    public static void printType() {
-        System.out.print("\nSelect a game type:\n" + 
-                "1. Regular Sudoku\n" +
-                "2. X Sudoku\n" +
-                "3. Exit\n\n" +
-                "Select an action [1-3]: ");
-    }
-
     /**
      * Read a single integer value from the console and return it.
      * This function blocks the program's execution until a user
