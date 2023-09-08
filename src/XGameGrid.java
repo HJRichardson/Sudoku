@@ -12,7 +12,7 @@ public class XGameGrid extends GameGrid {
         super(gameGrid);
     }
 
-    private boolean checkDiagonal(int row, int col, int value) {
+    private boolean checkDiagonal(int row, int col, int value, boolean explanation) {
         if (row != col && row != GameGrid.GRID_DIM - col - 1) {
             return false;
         }
@@ -20,14 +20,18 @@ public class XGameGrid extends GameGrid {
         if (row == col) {
             for (int i = 0; i < GameGrid.GRID_DIM; i++) {
                 if (row != i && grid[i][i].getValue() == value) {
-                    System.out.printf("There is a %d on the diagonal! Located at (%d, %d).\n", value, i+1, i+1);
+                    if (explanation) {
+                        System.out.printf("There is a %d on the diagonal! Located at (%d, %d).\n", value, i+1, i+1);
+                    }
                     return true;
                 }
             }
         } else {
             for (int i = 0; i < GameGrid.GRID_DIM; i++) {
                 if (row != i && grid[i][GRID_DIM-i-1].getValue() == value) {
-                    System.out.printf("There is a %d on the diagonal! Located at (%d, %d).\n", value, i+1, GRID_DIM-i);
+                    if (explanation) {
+                        System.out.printf("There is a %d on the diagonal! Located at (%d, %d).\n", value, i+1, i+1);
+                    }
                     return true;
                 }
             }
@@ -57,9 +61,9 @@ public class XGameGrid extends GameGrid {
     }
 
     @Override
-    protected boolean isValid(int row, int col, int value) {
-        boolean checkOriginalRules = super.isValid(row, col, value);
-        return checkOriginalRules && !checkDiagonal(row, col, value);
+    protected boolean isValid(int row, int col, int value, boolean explanation) {
+        boolean checkOriginalRules = super.isValid(row, col, value, explanation);
+        return checkOriginalRules && !checkDiagonal(row, col, value, explanation);
     }
 
     @Override
@@ -83,12 +87,12 @@ public class XGameGrid extends GameGrid {
                 if (!element.isInitial()) {
                     sb.append(" ");
                 }
-                if ((col + 1) % 3 == 0 && (col != grid[0].length - 1)) {
+                if ((col + 1) % SUBGRID_DIM == 0 && (col != grid[0].length - 1)) {
                     sb.append("| ");
                 }
             }
             sb.append("\n");
-            if ((row + 1) % 3 == 0 && row != grid.length - 1) {
+            if ((row + 1) % SUBGRID_DIM == 0 && row != grid.length - 1) {
                 sb.append("------------------------------------------------\n");
             }
         }

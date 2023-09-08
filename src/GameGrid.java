@@ -5,28 +5,45 @@ import java.util.Objects;
 
 public abstract class GameGrid {
     
-    // Constants for coordinate boundaries and Sudoku numbers
+    // Constants for the grid, including dimensions and
+    // possible values.
     public static final int GRID_DIM = 9;
     public static final int SUBGRID_DIM = GRID_DIM / 3;
     public static final int MAX_VAL = 9;
     public static final int MIN_VAL = 1;
     public static final int EMPTY_VAL = 0;
 
+    // Grid instance variable
     protected final Field[][] grid;
 
+    /**
+     * Constructor to create a GameGrid instance from
+     * a 9x9 2D array containing the sudoku values.
+     * @param grid - The grid to be initialised.
+     */
     public GameGrid(int[][] grid) {
         Objects.requireNonNull(grid, "grid must not be null");
         this.grid = initialiseGrid(grid);
     }
 
+    /**
+     * Constructor to create a GameGrid instance from
+     * a file path.
+     * @param path - The file path to the sudoku file.
+     */
     public GameGrid(String path) {
         int[][] grid = IOUtils.loadFromFile(path);
         Objects.requireNonNull(grid, "grid must not be null");
         this.grid = initialiseGrid(grid);
     }
 
-    // Creates a deep copy of the current state of the game
+    /**
+     * Creates a deep copy of the current sudoku grid.
+     * @param gameGrid - The GameGrid instance to create a copy of.
+     */
     public GameGrid(GameGrid gameGrid) {
+        Objects.requireNonNull(gameGrid);
+
         this.grid = new Field[GRID_DIM][GRID_DIM];
         for (int row = 0; row < GRID_DIM; row++) {
             for (int col = 0; col < GRID_DIM; col++) {
@@ -35,12 +52,40 @@ public abstract class GameGrid {
         }
     }
 
+    /**
+     * Creates a deep copy of {@code gameGrid}, calling the constructor
+     * based on if {@code gameGrid} is of type {@code RGameGrid} or
+     * {@code XGameGrid}.
+     * 
+     * @param gameGrid - The GameGrid instance.
+     * @return The deep copy of {@code gameGrid}.
+     */
+    public static GameGrid copyGameGrid(GameGrid gameGrid) {
+        Objects.requireNonNull(gameGrid);
+
+        if (gameGrid instanceof RGameGrid) {
+            return new RGameGrid(gameGrid);
+        } else {
+            return new XGameGrid(gameGrid);
+        }
+    }
+
+    /**
+     * Initialises a GameGrid instance based on a 2D array of
+     * grid values. Each entry is of type Field, containing the value
+     * of the sudoku and a boolean of whether it is an initial field.
+     * 
+     * @param grid - 2D array of sudoku values.
+     * @return The 2D array of Field values.
+     */
     private Field[][] initialiseGrid(int[][] grid) {
+        Objects.requireNonNull(grid);
+        
         Field[][] initialisedGrid = new Field[GRID_DIM][GRID_DIM];
         for (int row = 0; row < GRID_DIM; row++) {
             for (int col = 0; col < GRID_DIM; col++) {
                 int value = grid[row][col];
-                if (value != 0) {
+                if (value != EMPTY_VAL) {
                     initialisedGrid[row][col] = new Field(value, true);
                 } else {
                     initialisedGrid[row][col] = new Field();
@@ -50,28 +95,28 @@ public abstract class GameGrid {
         return initialisedGrid;
     }
 
-    public static GameGrid copyGameGrid(GameGrid game) {
-        if (game instanceof RGameGrid) {
-            return new RGameGrid(game);
-        } else {
-            return new XGameGrid(game);
-        }
-    }
-
+    /**
+     * Gets the value of a Field.
+     * 
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     * @return The value at (row, col).
+     */
     public int getField(int row, int col) {
         return grid[row][col].getValue();
     }
 
-    public boolean setField(int row, int col, int value) {
-        if (!isInitial(row, col) && isValid(row, col, value)) {
-            grid[row][col].setValue(value);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setFieldSolver(int row, int col, int value) {
-        if (!isInitial(row, col) && isValidSolver(row, col, value)) {
+    /**
+     * Sets the value of a Field assuming it follows
+     * the sudoku rules.
+     * 
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     * @param value - Value to set
+     * @param explanation - Whether the program should display why an input cannot be made.
+     */
+    public boolean setField(int row, int col, int value, boolean explanation) {
+        if (isValid(row, col, value, explanation)) {
             grid[row][col].setValue(value);
             return true;
         }
@@ -80,7 +125,7 @@ public abstract class GameGrid {
 
     public void clearField(int row, int col) {
         if (!isInitial(row, col)) {
-            grid[row][col].setValue(0);
+            grid[row][col].setValue(EMPTY_VAL);
         }
     }
 
@@ -88,53 +133,41 @@ public abstract class GameGrid {
         return grid[row][col].isInitial();
     }
 
-    private boolean checkRow(int row, int col, int value) {
+    private boolean checkRow(int row, int col, int value, boolean explanation) {
         for (int i = 0; i < grid[0].length; i++) {
             if (i != col && grid[row][i].getValue() == value) {
-                System.out.printf("There is a %d in the same row! Located at (%d, %d).\n", value, i+1, row+1);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean checkRowSolver(int row, int col, int value) {
-        for (int i = 0; i < grid[0].length; i++) {
-            if (i != col && grid[row][i].getValue() == value) {
+                if (explanation) {
+                    System.out.printf("There is a %d in the same row! Located at (%d, %d).\n", value, i+1, row+1);
+                }
                 return true;
             }
         }
         return false;
     }
     
-    private boolean checkCol(int row, int col, int value) {
+    private boolean checkCol(int row, int col, int value, boolean explanation) {
         for (int j = 0; j < grid.length; j++) {
             if (j != row && grid[j][col].getValue() == value) {
-                System.out.printf("There is a %d in the same column! Located at (%d, %d).\n", value, col+1, j+1);
+                if (explanation) {
+                    System.out.printf("There is a %d in the same column! Located at (%d, %d).\n", value, col+1, j+1);
+                }
                 return true;
             }
         }
         return false;
     }
 
-    private boolean checkColSolver(int row, int col, int value) {
-        for (int j = 0; j < grid.length; j++) {
-            if (j != row && grid[j][col].getValue() == value) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean checkSubGrid(int row, int col, int value) {
-        int rowOffset = row % 3;
-        int colOffset = col % 3;
+    private boolean checkSubGrid(int row, int col, int value, boolean explanation) {
+        int rowOffset = row % SUBGRID_DIM;
+        int colOffset = col % SUBGRID_DIM;
         int startRow = row - rowOffset;
         int startCol = col - colOffset;
-        for (int j = startRow; j < startRow + 3; j++) {
-            for (int i = startCol; i < startCol + 3; i++) {
+        for (int j = startRow; j < startRow + SUBGRID_DIM; j++) {
+            for (int i = startCol; i < startCol + SUBGRID_DIM; i++) {
                 if ((grid[j][i].getValue() == value) && ((j != row) || (i != col))) {
-                    System.out.printf("There is a %d in the same subgrid! Located at (%d, %d).\n", value, i+1, j+1);
+                    if (explanation) {
+                        System.out.printf("There is a %d in the same subgrid! Located at (%d, %d).\n", value, i+1, j+1);
+                    }
                     return true;
                 } 
             }
@@ -142,34 +175,19 @@ public abstract class GameGrid {
         return false;
     }
 
-    private boolean checkSubGridSolver(int row, int col, int value) {
-        int rowOffset = row % 3;
-        int colOffset = col % 3;
-        int startRow = row - rowOffset;
-        int startCol = col - colOffset;
-        for (int j = startRow; j < startRow + 3; j++) {
-            for (int i = startCol; i < startCol + 3; i++) {
-                if ((grid[j][i].getValue() == value) && ((j != row) || (i != col))) {
-                    return true;
-                } 
+    protected boolean isValid(int row, int col, int value, boolean explanation) {
+        if (isInitial(row, col)) {
+            if (explanation) {
+                System.out.println("Cannot change the value of an initial field.");
             }
+            return false;
         }
-        return false;
-    }
-
-    protected boolean isValid(int row, int col, int value) {
-        boolean rowCheck = checkRow(row, col, value);
-        boolean colCheck = checkCol(row, col, value);
-        boolean subGridCheck = checkSubGrid(row, col, value);
+        boolean rowCheck = checkRow(row, col, value, explanation);
+        boolean colCheck = checkCol(row, col, value, explanation);
+        boolean subGridCheck = checkSubGrid(row, col, value, explanation);
         return !(rowCheck || colCheck || subGridCheck);
     }
 
-    protected boolean isValidSolver(int row, int col, int value) {
-        boolean rowCheck = checkRowSolver(row, col, value);
-        boolean colCheck = checkColSolver(row, col, value);
-        boolean subGridCheck = checkSubGridSolver(row, col, value);
-        return !(rowCheck || colCheck || subGridCheck);
-    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -181,12 +199,12 @@ public abstract class GameGrid {
                 if (!element.isInitial()) {
                     sb.append(" ");
                 }
-                if ((col + 1) % 3 == 0 && (col != grid[0].length - 1)) {
+                if ((col + 1) % SUBGRID_DIM == 0 && (col != grid[0].length - 1)) {
                     sb.append("| ");
                 }
             }
             sb.append("\n");
-            if ((row + 1) % 3 == 0 && row != grid.length - 1) {
+            if ((row + 1) % SUBGRID_DIM == 0 && row != grid.length - 1) {
                 sb.append("-------------------------------\n");
             }
         }

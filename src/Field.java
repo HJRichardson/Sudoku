@@ -4,7 +4,7 @@ public class Field {
     private final boolean initial;
 
     public Field() {
-        this.value = 0;
+        this.value = GameGrid.EMPTY_VAL;
         this.initial = false;
     }
 

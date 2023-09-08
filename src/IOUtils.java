@@ -39,7 +39,7 @@ public class IOUtils {
 	                    throw new RuntimeException("Given Sudoku file has invalid format: " + fileName);
 	
 	                int value = in.nextInt();
-	                if (value < 0 || value > 9)
+	                if (value < 0 || value > GameGrid.GRID_DIM)
 	                    throw new RuntimeException("Given Sudoku file has invalid "
 	                               + "entry at: " + column + "x" + row);
 	               
@@ -57,6 +57,8 @@ public class IOUtils {
     }
 
     public static HashMap<String, GameGrid> loadFromFolder(String dir) {
+        Objects.requireNonNull(dir);
+        
         HashMap<String, GameGrid> map = new HashMap<>();
         File file = new File(dir);
         if (file.isDirectory()) {

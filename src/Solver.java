@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Solver {
     
-    public static boolean solve(GameGrid game) {
-        Objects.requireNonNull(game);
+    public static boolean solve(GameGrid gameGrid) {
+        Objects.requireNonNull(gameGrid);
 
         // Begin search at top left of grid (0, 0)
         int col = 0;
@@ -18,13 +18,13 @@ public class Solver {
         while(!(col == GameGrid.GRID_DIM - 1 && row == -1)) {
             
             // Attempt inserting values in should the field not be an initial one
-            if(!game.isInitial(col, row)) {
+            if(!gameGrid.isInitial(col, row)) {
                 goBack = false; // assume we will find a valid value and move forward
 
                 // Attempt the increase: if we do not find a valid value, then clear field
                 // and move backwards to a previously checked field
-                if(!tryIncrease(game, col, row)) {
-                    game.clearField(col, row);
+                if(!tryIncrease(gameGrid, col, row)) {
+                    gameGrid.clearField(col, row);
                     goBack = true;
                 }
             } 
@@ -54,8 +54,8 @@ public class Solver {
        return false;
      }
 
-    public static ArrayList<GameGrid> findAllSolutions(GameGrid game) {
-        Objects.requireNonNull(game);
+    public static ArrayList<GameGrid> findAllSolutions(GameGrid gameGrid) {
+        Objects.requireNonNull(gameGrid);
         ArrayList<GameGrid> solutions = new ArrayList<>();
 
         // Begin search at top left of grid (0, 0)
@@ -70,13 +70,13 @@ public class Solver {
         while(!(col == GameGrid.GRID_DIM - 1 && row == -1)) {
             
             // Attempt inserting values in should the field not be an initial one
-            if(!game.isInitial(col, row)) {
+            if(!gameGrid.isInitial(col, row)) {
                 goBack = false; // assume we will find a valid value and move forward
 
                 // Attempt the increase: if we do not find a valid value, then clear field
                 // and move backwards to a previously checked field
-                if(!tryIncrease(game, col, row)) {
-                    game.clearField(col, row);
+                if(!tryIncrease(gameGrid, col, row)) {
+                    gameGrid.clearField(col, row);
                     goBack = true;
                 }
             } 
@@ -98,7 +98,7 @@ public class Solver {
 
             // If we move past the final cell, the solution has been found
             if (col == 0 && row == GameGrid.GRID_DIM) {
-                GameGrid copy = GameGrid.copyGameGrid(game);
+                GameGrid copy = GameGrid.copyGameGrid(gameGrid);
                 solutions.add(copy);
                 col = GameGrid.GRID_DIM - 1;
                 row = GameGrid.GRID_DIM - 1;
@@ -110,10 +110,10 @@ public class Solver {
        return solutions;
      }
 
-     private static boolean tryIncrease(GameGrid game, int row, int col) {
-        int value = game.getField(row, col);
+     private static boolean tryIncrease(GameGrid gameGrid, int row, int col) {
+        int value = gameGrid.getField(row, col);
         for (int newValue = value + 1; newValue <= GameGrid.MAX_VAL; newValue++) {
-            if (game.setFieldSolver(row, col, newValue)) {
+            if (gameGrid.setField(row, col, newValue, false)) {
                 return true;
             }
         }
