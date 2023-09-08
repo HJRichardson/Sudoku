@@ -146,17 +146,21 @@ public class Sudoku07 {
         Objects.requireNonNull(gameGrid);
         
         switch (input) {
+            // Prints game.
             case 1:
                 System.out.println(gameGrid);
                 break;
+            // Clears field and prints updated game.
             case 2:
                 clearField(gameGrid);
                 System.out.println(gameGrid);
                 break;
+            // Sets field and prints updated game.
             case 3:
                 setField(gameGrid);
                 System.out.println(gameGrid);
                 break;
+            // Solves game and prints it.
             case 4:
                 GameGrid copy = GameGrid.copyGameGrid(gameGrid);
                 boolean solved = Solver.solve(copy);
@@ -167,6 +171,7 @@ public class Sudoku07 {
                     System.out.println("No solution found.");
                 }
                 break;
+            // Finds all solutions and prints them.
             case 5:
                 GameGrid gridCopy = GameGrid.copyGameGrid(gameGrid);
                 ArrayList<GameGrid> solutions = Solver.findAllSolutions(gridCopy);
@@ -187,6 +192,7 @@ public class Sudoku07 {
                     }
                 }
                 break;
+            // Ranks the current game.
             case 6:
                 GameGrid rankerCopy = GameGrid.copyGameGrid(gameGrid);
                 float rank = Ranker.rankSudoku(rankerCopy);
