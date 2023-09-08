@@ -168,8 +168,13 @@ public class Sudoku07 {
                 if (solutions.isEmpty()) {
                     System.out.println("No solution found.");
                 } else {
+                    int numSolutions = solutions.size();
+                    if (numSolutions == 1) {
+                        System.out.println("1 solution has been found!\n");
+                    } else {
+                        System.out.println(numSolutions + " solutions have been found!\n");
+                    }
                     int counter = 1;
-                    System.out.println("Solutions found!\n");
                     for (GameGrid solution : solutions) {
                         System.out.println("Solution " + counter + ":");
                         System.out.println(solution + "\n");

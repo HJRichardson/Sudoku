@@ -15,15 +15,16 @@ public class IOUtils {
 
     /**
      * This function loads a Sudoku game grid from a file.
-     *
-     * @param gridFileName the path to a Sudoku grid data file
-     * @return a two-dimensional integer array holding the data from the specified file
+     * NOTE: This function is adapted from one of the University of Edinburgh
+     * tutorials.
+     * @param path - The file path to a sudoku file.
+     * @return The 2D array of sudoku values.
      *
      */
-    public static int[][] loadFromFile(String gridFileName) {
-        Objects.requireNonNull(gridFileName);
+    public static int[][] loadFromFile(String path) {
+        Objects.requireNonNull(path);
 
-        Path fileName = Paths.get(gridFileName);
+        Path fileName = Paths.get(path);
 
         if (!Files.exists(fileName))
             throw new IllegalArgumentException("Given file does not exist: " + fileName);
@@ -31,31 +32,33 @@ public class IOUtils {
         int[][] grid = new int[GameGrid.GRID_DIM][GameGrid.GRID_DIM];
         
         try {     
-        	Scanner in = new Scanner(fileName);         
-	
+        	Scanner scanner = new Scanner(fileName);         
 	        for(int row = 0; row < GameGrid.GRID_DIM; row++) {
-	            for(int column = 0; column < GameGrid.GRID_DIM; column++) {
-	                if(!in.hasNextInt())
+	            for(int col = 0; col < GameGrid.GRID_DIM; col++) {
+	                if(!scanner.hasNextInt())
 	                    throw new RuntimeException("Given Sudoku file has invalid format: " + fileName);
 	
-	                int value = in.nextInt();
+	                int value = scanner.nextInt();
 	                if (value < 0 || value > GameGrid.GRID_DIM)
-	                    throw new RuntimeException("Given Sudoku file has invalid "
-	                               + "entry at: " + column + "x" + row);
+	                    throw new RuntimeException("Given Sudoku file has an invalid "
+	                               + "entry at: " + col + "x" + row);
 	               
-	                grid[row][column] = value;
+	                grid[row][col] = value;
 	            }
 	        }
-	        
-	        in.close();
-        
+	        scanner.close();
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
-
         return grid;
     }
 
+    /**
+     * This function loads every valid sudoku game from a folder.
+     * 
+     * @param path - The file path to a folder with sudoku files.
+     * @return A HashMap of file name to GameGrid instances.
+     */    
     public static HashMap<String, GameGrid> loadFromFolder(String dir) {
         Objects.requireNonNull(dir);
         

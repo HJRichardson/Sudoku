@@ -1,5 +1,3 @@
-// IDEA: Use boolean variable "solver" on the check field functions to remove the need for solver copies.
-
 import java.lang.StringBuilder;
 import java.util.Objects;
 
@@ -18,7 +16,7 @@ public abstract class GameGrid {
 
     /**
      * Constructor to create a GameGrid instance from
-     * a 9x9 2D array containing the sudoku values.
+     * a 2D array containing the sudoku values.
      * @param grid - The grid to be initialised.
      */
     public GameGrid(int[][] grid) {
@@ -123,40 +121,79 @@ public abstract class GameGrid {
         return false;
     }
 
+    /**
+     * Clears the value of a sudoku field (if possible).
+     * 
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     */
     public void clearField(int row, int col) {
         if (!isInitial(row, col)) {
             grid[row][col].setValue(EMPTY_VAL);
         }
     }
 
+    /**
+     * Returns if the field is an initial one.
+     * 
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     * @return If the value is initial.
+     */
     public boolean isInitial(int row, int col) {
         return grid[row][col].isInitial();
     }
 
+    /**
+     * Checks whether the value could be placed in the row.
+     * 
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     * @param value - Value to set.
+     * @param explanation - Whether the program should display why an input cannot be made.
+     * @return If the value is valid in terms of rows.
+     */
     private boolean checkRow(int row, int col, int value, boolean explanation) {
         for (int i = 0; i < grid[0].length; i++) {
             if (i != col && grid[row][i].getValue() == value) {
                 if (explanation) {
                     System.out.printf("There is a %d in the same row! Located at (%d, %d).\n", value, i+1, row+1);
                 }
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
-    
+
+    /**
+     * Checks whether the value could be placed in the column.
+     * 
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     * @param value - Value to set.
+     * @param explanation - Whether the program should display why an input cannot be made.
+     * @return If the value is valid in terms of columns.
+     */
     private boolean checkCol(int row, int col, int value, boolean explanation) {
         for (int j = 0; j < grid.length; j++) {
             if (j != row && grid[j][col].getValue() == value) {
                 if (explanation) {
                     System.out.printf("There is a %d in the same column! Located at (%d, %d).\n", value, col+1, j+1);
                 }
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
+    /**
+     * Checks whether the value could be placed in the subgrid.
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     * @param value - Value to set.
+     * @param explanation - Whether the program should display why an input cannot be made.
+     * @return If the value is a valid move in terms of subgrids.
+     */
     private boolean checkSubGrid(int row, int col, int value, boolean explanation) {
         int rowOffset = row % SUBGRID_DIM;
         int colOffset = col % SUBGRID_DIM;
@@ -168,13 +205,22 @@ public abstract class GameGrid {
                     if (explanation) {
                         System.out.printf("There is a %d in the same subgrid! Located at (%d, %d).\n", value, i+1, j+1);
                     }
-                    return true;
+                    return false;
                 } 
             }
         }
-        return false;
+        return true;
     }
 
+    /**
+     * Checks whether the value to set is a valid move.
+     * 
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     * @param value - Value to set.
+     * @param explanation - Whether the program should display why an input cannot be made.
+     * @return If the value is a valid move.
+     */
     protected boolean isValid(int row, int col, int value, boolean explanation) {
         if (isInitial(row, col)) {
             if (explanation) {
@@ -185,10 +231,13 @@ public abstract class GameGrid {
         boolean rowCheck = checkRow(row, col, value, explanation);
         boolean colCheck = checkCol(row, col, value, explanation);
         boolean subGridCheck = checkSubGrid(row, col, value, explanation);
-        return !(rowCheck || colCheck || subGridCheck);
+        return rowCheck && colCheck && subGridCheck;
     }
 
-
+    /**
+     * Returns a string representation of the grid.
+     * @return A string representation of the grid.
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < grid.length; row++) {
