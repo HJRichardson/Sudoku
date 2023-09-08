@@ -23,6 +23,9 @@ public class Sudoku07 {
 
     /**
      * Reads the integer given by the user.
+     * NOTE: This function is adapted from one of the University of Edinburgh
+     * tutorials.
+     * 
      * @return The user's input as integer or -1 if the user's input was invalid.
      */
     public static int parseInput() {
@@ -37,6 +40,8 @@ public class Sudoku07 {
     /**
      * Takes an input from the user until it is between {@code min} and
      * {@code max}.
+     * NOTE: This function is adapted from one of the University of Edinburgh
+     * tutorials.
      *
      * @param msg - A name for the requested data.
      * @param min - Minimum accepted integer.

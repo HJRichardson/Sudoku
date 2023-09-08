@@ -45,6 +45,8 @@ public class Ranker {
     /**
      * Calculates the rank of a sudoku game given the number of solutions
      * and free fields.
+     * NOTE: This function is adapted from one of the University of Edinburgh
+     * tutorials.
      *
      * @param numSolutions - Number of solutions to the sudoku game.
      * @param numFreeFields - Number of free fields in the sudoku game.
