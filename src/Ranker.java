@@ -56,7 +56,7 @@ public class Ranker {
         if (numSolutions == 0) {
             return Float.MAX_VALUE;
         }
-        return numSolutions + (1 - (numFreeFields * (1f / GameGrid.GRID_DIM * GameGrid.GRID_DIM)));
+        return numSolutions + (1 - (numFreeFields * (1f / (GameGrid.GRID_DIM * GameGrid.GRID_DIM))));
     }
 
     /**
