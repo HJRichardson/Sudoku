@@ -1,4 +1,3 @@
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import java.io.File;
 import java.util.Objects;

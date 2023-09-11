@@ -1,6 +1,8 @@
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+
+import java.awt.Font;
 import java.awt.GridLayout;
 
 public class SudokuFrame extends JFrame {
@@ -8,7 +10,7 @@ public class SudokuFrame extends JFrame {
     private final GameGrid gameGrid;
 
     public SudokuFrame(String path) {
-        super.setSize(500, 500);
+        super.setSize(750, 750);
         super.setTitle(path);
         super.setLocationRelativeTo(null);
 
@@ -25,6 +27,7 @@ public class SudokuFrame extends JFrame {
             for (int col = 0; col < GameGrid.GRID_DIM; col++) {
                 JButton button = new JButton();
                 button.addActionListener(new SudokuFieldAction(gameGrid, row, col));
+                button.setFont(new Font("Arial", Font.PLAIN, 40));
                 if (gameGrid.isInitial(row, col)) {
                     button.setText(gameGrid.getField(row, col) + "");
                     button.setEnabled(false);
