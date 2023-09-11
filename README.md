@@ -21,4 +21,7 @@ The terminal version of the sudoku game has the following features:
 
 This sudoku version has a Graphical User Interface (GUI) to make the game more interactive. Currently, the GUI version contains the feature to allow the user to manually enter or clear fields within a sudoku grid. An image of the interactive grid is shown below.
 
+![Sudoku Grid](https://github.com/HJRichardson/Sudoku/blob/main/SudokuGrid.png?raw=true)
+
+The blue cells are the entries which are blank. They can be clicked on and a message box pops up, prompting the user to enter a value. This value is validated against the sudoku rules and, if valid, is put into the grid.
 ## How to Run
