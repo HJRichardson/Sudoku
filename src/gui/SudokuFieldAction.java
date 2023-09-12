@@ -10,16 +10,28 @@ import javax.swing.JOptionPane;
 
 public class SudokuFieldAction implements ActionListener{
     
+    // Instance variables.
     private final GameGrid gameGrid;    
     private final int row;
     private final int col;
 
+    /**
+     * Constructor to create a SudokuFieldAction for a specific field
+     * in the grid.
+     * @param gameGrid - The grid.
+     * @param row - The row of the grid.
+     * @param column - The column of the grid.
+     */
     public SudokuFieldAction(GameGrid gameGrid, int row, int col) {
         this.gameGrid = gameGrid;
         this.row = row;
         this.col = col;
     }
 
+    /**
+     * Implements the action of setting a field for a specific button in the grid.
+     * @param action - The action which will be performed on the field.
+     */
     @Override
     public void actionPerformed(ActionEvent action) {
         Objects.requireNonNull(action);

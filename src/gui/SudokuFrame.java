@@ -10,8 +10,14 @@ import java.awt.GridLayout;
 
 public class SudokuFrame extends JFrame {
     
+    // Instance variables.
     private final GameGrid gameGrid;
 
+    /**
+     * Constructor to create a SudokuFrame instance from
+     * a valid sudoku path.
+     * @param path - The sudoku file path.
+     */
     public SudokuFrame(String path) {
         super.setSize(750, 750);
         super.setTitle(path);
@@ -25,6 +31,10 @@ public class SudokuFrame extends JFrame {
         createButtonGrid();
     }
 
+    /**
+     * Sets up the sudoku frame layout, with a grid of NxN buttons with the initial sudoku
+     * values, where N = GameGrid.GRID_DIM is the number of rows/columns.
+     */
     private void createButtonGrid() {
         for (int row = 0; row < GameGrid.GRID_DIM; row++) {
             for (int col = 0; col < GameGrid.GRID_DIM; col++) {

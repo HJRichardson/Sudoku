@@ -14,12 +14,15 @@ public class Terminal {
      */
     public static void main(String[] args) {
         String path = getDirectory();
+        if (path == null) {
+            System.exit(0);
+        }
         GameGrid gameGrid = gameGridSetUp(path);
         while (true) {
             printMenu();
             int input = requestInt("a value between 1 and 7", 1, 7);
             if (input == 7) {
-                return;
+                System.exit(0);
             }
             processCommand(gameGrid, input, path);
         }
@@ -41,13 +44,23 @@ public class Terminal {
                 "Select an action [1-7]: ");
     }
 
+     /**
+     * Asks the user for a valid sudoku directory, including
+     * the file they wish to play. This loops until they give a valid one,
+     * or they decide to exit the prompt.
+     *
+     * @return A valid sudoku file path.
+     */
     public static String getDirectory() {
         Scanner scanner = new Scanner(System.in);
         String result;
         while (true) {
-            System.out.println("Please provide a file path to the Sudoku game file.");
+            System.out.println("Please provide a file path to the Sudoku game file. To exit, please type 'exit'.");
             if (scanner.hasNextLine()) {
                 result = scanner.nextLine();
+                if (result.equals("exit")) {
+                    return null;
+                }
                 File file = new File(result);
                 if (file.exists() && file.getName().endsWith(".sd")) {
                     return result;

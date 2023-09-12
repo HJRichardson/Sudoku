@@ -262,6 +262,11 @@ public abstract class GameGrid {
         return sb.toString();
     }
 
+    /**
+     * Returns the number of empty fields in the grid.
+     *
+     * @return The number of empty fields in the grid.
+     */
     public int countRemainingFields() {
         int numRemainingFields = 0;
         for (int row = 0; row < GameGrid.GRID_DIM; row++) {
