@@ -1,4 +1,0 @@
-RUN:
-cd src
-PS D:\Users\hj1ri\Documents\Java\Sudoku V2\src> javac -cp . Sudoku03.java
-PS D:\Users\hj1ri\Documents\Java\Sudoku V2\src> java -cp . Sudoku03 "D:\Users\hj1ri\Documents\Java\Sudoku V2\games\sudoku1.sd"
