@@ -20,20 +20,6 @@ public class SudokuFieldAction implements ActionListener{
         this.col = col;
     }
 
-    private int countRemainingFields() {
-        Objects.requireNonNull(this.gameGrid);
-
-        int numRemainingFields = 0;
-        for (int row = 0; row < GameGrid.GRID_DIM; row++) {
-            for (int col = 0; col < GameGrid.GRID_DIM; col++) {
-                if (this.gameGrid.getField(row, col) == GameGrid.EMPTY_VAL) {
-                    numRemainingFields++;
-                }
-            }
-        }
-        return numRemainingFields;
-    }
-
     @Override
     public void actionPerformed(ActionEvent action) {
         Objects.requireNonNull(action);
@@ -57,7 +43,7 @@ public class SudokuFieldAction implements ActionListener{
             if (gameGrid.isValid(row, col, value, false)) {
                 gameGrid.setField(row, col, value, false);
                 actionButton.setText(value + "");
-                if (countRemainingFields() == 0) {
+                if (gameGrid.countRemainingFields() == 0) {
                     JOptionPane.showMessageDialog(null, "You have successfully completed the sudoku. Well done!");
                 }
             } else {

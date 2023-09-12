@@ -9,6 +9,23 @@ import java.util.ArrayList;
 public class Terminal {
 
     /**
+     * Runs the sudoku program, giving options to solve it manually through user input
+     * or solve it using an algorithm.
+     */
+    public static void main(String[] args) {
+        String path = getDirectory();
+        GameGrid gameGrid = gameGridSetUp(path);
+        while (true) {
+            printMenu();
+            int input = requestInt("a value between 1 and 7", 1, 7);
+            if (input == 7) {
+                return;
+            }
+            processCommand(gameGrid, input, path);
+        }
+    }
+
+    /**
      * Prints a game menu message to the console, listing choices the
      * user can make.
      */
@@ -22,6 +39,25 @@ public class Terminal {
                 "6. Rank Sudoku\n" +
                 "7. Exit\n\n" +
                 "Select an action [1-7]: ");
+    }
+
+    public static String getDirectory() {
+        Scanner scanner = new Scanner(System.in);
+        String result;
+        while (true) {
+            System.out.println("Please provide a file path to the Sudoku game file.");
+            if (scanner.hasNextLine()) {
+                result = scanner.nextLine();
+                File file = new File(result);
+                if (file.exists() && file.getName().endsWith(".sd")) {
+                    return result;
+                } else if (file.exists()) {
+                    System.out.println("The file you have selected is not a valid sudoku game.");
+                } else {
+                    System.out.println("The selected file does not exist.");
+                }
+            }
+        }
     }
 
     /**
@@ -92,7 +128,10 @@ public class Terminal {
                               GameGrid.MAX_VAL + ")", GameGrid.MIN_VAL, GameGrid.MAX_VAL) - 1;
         int value = requestInt("the value to set (between " + GameGrid.MIN_VAL + " and " +
                               GameGrid.MAX_VAL + ")", GameGrid.MIN_VAL, GameGrid.MAX_VAL);
-        gameGrid.setField(row, col, value, true);
+        boolean success = gameGrid.setField(row, col, value, true);
+        if (success && gameGrid.countRemainingFields() == 0) {
+            System.out.println("Well done! You solved the sudoku!");
+        }
     }
 
     /**
@@ -106,6 +145,10 @@ public class Terminal {
         Objects.requireNonNull(path);
 
         File file = new File(path);
+        if (!file.exists()) {
+            System.out.println("Sudoku file does not exist.");
+            return null;
+        }
         String sudokuName = file.getName();
         GameGrid gameGrid;
         if (sudokuName.startsWith("x")) {
@@ -117,35 +160,12 @@ public class Terminal {
     }
 
     /**
-     * Runs the sudoku program, giving options to solve it manually through user input
-     * or solve it using an algorithm.
-     * 
-     * @param args - The file path to the sudoku file.
-     */
-    public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("No path provided.");
-            return;
-        }
-        String path = args[0];
-        GameGrid gameGrid = gameGridSetUp(path);
-        while (true) {
-            printMenu();
-            int input = requestInt("a value between 1 and 7", 1, 7);
-            if (input == 7) {
-                return;
-            }
-            processCommand(gameGrid, input);
-        }
-    }
-
-    /**
      * Helper function to process the user's inputs on the current sudoku.
      * 
      * @param gameGrid - The GameGrid instance.
      * @param input - The user's input.
      */
-    private static void processCommand(GameGrid gameGrid, int input) {
+    private static void processCommand(GameGrid gameGrid, int input, String path) {
         Objects.requireNonNull(gameGrid);
         
         switch (input) {
@@ -165,7 +185,8 @@ public class Terminal {
                 break;
             // Solves game and prints it.
             case 4:
-                GameGrid copy = GameGrid.copyGameGrid(gameGrid);
+                GameGrid originalGameGrid = gameGridSetUp(path);
+                GameGrid copy = GameGrid.copyGameGrid(originalGameGrid);
                 boolean solved = Solver.solve(copy);
                 if (solved) {
                     System.out.println("A solution has been found!\n");

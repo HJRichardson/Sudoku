@@ -261,4 +261,16 @@ public abstract class GameGrid {
         }
         return sb.toString();
     }
+
+    public int countRemainingFields() {
+        int numRemainingFields = 0;
+        for (int row = 0; row < GameGrid.GRID_DIM; row++) {
+            for (int col = 0; col < GameGrid.GRID_DIM; col++) {
+                if (this.getField(row, col) == GameGrid.EMPTY_VAL) {
+                    numRemainingFields++;
+                }
+            }
+        }
+        return numRemainingFields;
+    }
 }
