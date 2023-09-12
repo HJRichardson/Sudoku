@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Sudoku07 {
+public class Terminal {
 
     /**
      * Prints a game menu message to the console, listing choices the
