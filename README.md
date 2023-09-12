@@ -25,3 +25,4 @@ This sudoku version has a Graphical User Interface (GUI) to make the game more i
 
 The blue cells are the entries which are blank. They can be clicked on and a message box pops up, prompting the user to enter a value. This value is validated against the sudoku rules and, if valid, is put into the grid.
 ## How to Run
+To run, use an IDE of your choice and click to run the main method in either <code>Terminal.java</code> for the terminal version or <code>UserInterface.java</code> in the GUI version. In both versions, you will be asked to provide a file path to the sudoku game you would like to play. Please find the <code>games</code> folder on your computer and copy the directory path to this folder, adding onto the end the sudoku game to play (e.g. "D:\Users\hj1ri\Documents\Java\Sudoku\games\sudoku2.sd"). This will then load the sudoku game. 
