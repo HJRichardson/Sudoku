@@ -1,3 +1,5 @@
+package sudoku;
+
 import java.lang.StringBuilder;
 import java.util.Objects;
 
@@ -221,7 +223,7 @@ public abstract class GameGrid {
      * @param explanation - Whether the program should display why an input cannot be made.
      * @return If the value is a valid move.
      */
-    protected boolean isValid(int row, int col, int value, boolean explanation) {
+    public boolean isValid(int row, int col, int value, boolean explanation) {
         if (isInitial(row, col)) {
             if (explanation) {
                 System.out.println("Cannot change the value of an initial field.");

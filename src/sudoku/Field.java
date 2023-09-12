@@ -1,3 +1,5 @@
+package sudoku;
+
 public class Field {
     
     // Field instance variables.

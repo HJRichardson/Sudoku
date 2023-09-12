@@ -1,3 +1,6 @@
+package gui;
+
+import sudoku.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;

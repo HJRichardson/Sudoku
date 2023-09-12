@@ -1,3 +1,5 @@
+package sudoku;
+
 public class XGameGrid extends GameGrid {
     
     /**
@@ -74,7 +76,7 @@ public class XGameGrid extends GameGrid {
      * @return If the value is a valid move.
      */
     @Override
-    protected boolean isValid(int row, int col, int value, boolean explanation) {
+    public boolean isValid(int row, int col, int value, boolean explanation) {
         boolean checkOriginalRules = super.isValid(row, col, value, explanation);
         return checkOriginalRules && !checkDiagonal(row, col, value, explanation);
     }

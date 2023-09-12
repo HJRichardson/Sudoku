@@ -1,3 +1,6 @@
+package terminal;
+
+import sudoku.*;
 import java.util.Scanner;
 import java.util.Objects;
 import java.io.File;

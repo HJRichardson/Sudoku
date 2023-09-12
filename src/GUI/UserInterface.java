@@ -1,3 +1,6 @@
+package gui;
+
+import sudoku.*;
 import javax.swing.JOptionPane;
 import java.io.File;
 import java.util.Objects;
@@ -13,12 +16,12 @@ public class UserInterface {
     private static String askForPath() {
         String path = JOptionPane.showInputDialog("Please provide a file path to the Sudoku game file.");
         if (path == null) {
-            return "D:\\Users\\hj1ri\\Documents\\Java\\Sudoku V2\\games\\sudoku0.sd";
+            return "D:\\Users\\hj1ri\\Documents\\Java\\Sudoku\\games\\sudoku0.sd";
         }
 
         File file = new File(path);
         if (!file.exists()) {
-            return "D:\\Users\\hj1ri\\Documents\\Java\\Sudoku V2\\games\\sudoku0.sd";
+            return "D:\\Users\\hj1ri\\Documents\\Java\\Sudoku\\games\\sudoku0.sd";
         }
         return path;
     }
