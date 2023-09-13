@@ -22,8 +22,13 @@ The terminal version of the sudoku game has the following features listed in the
 
   ![Sudoku Grid](https://github.com/HJRichardson/Sudoku/blob/main/SudokuSolutions.png?raw=true)
   
-- Ranking: The user can display the ranking of the particular sudoku game: a floating point value greater than 1 which specifies the difficulty of the game based on the number of solutions and number of free fields in the grid. The higher the rank, the easier the game. This value can be displayed for the specific sudoku game, or the ranks of all sudoku games within the <code>games</code> folder can be displayed at once.
-- X-Sudoku: The user has the option to play sudoku variation called X-Sudoku. This game follows the standard sudoku rules, however it has the additional requirement that any entries on either of the main diagonals must be unique within the diagonal they are on. To play this variation, the user can load in a sudoku file in <code>games</code> which beings with "x". The solver also works for this variation.
+- Ranking: The user can display the ranking of the particular sudoku game: a floating point value greater than 1 which specifies the difficulty of the game, denoted as $r$, based on the number of solutions, $s$, and number of free fields in the grid, $f$, for an $n$x$n$ grid. The higher the rank, the easier the game. The forumla for the rank, r,  can be seen below:
+
+  $$r = s + (1 - \left(f*\frac{1}{n^{2}}\right))$$
+  This value can be displayed for the specific sudoku game, or the ranks of all sudoku games within the <code>games</code> folder can be displayed at once.
+- X-Sudoku: The user has the option to play sudoku variation called X-Sudoku. This game follows the standard sudoku rules, however it has the additional requirement that any entries on either of the main diagonals must be unique within the diagonal they are on. To play this variation, the user can load in a sudoku file in <code>games</code> which beings with "x". The solver also works for this variation. To make it the diagonal entries clearer, they are enclosed within square braces. An example of this can be seen below:
+
+  ![Sudoku Grid](https://github.com/HJRichardson/Sudoku/blob/main/XSudokuGrid.png?raw=true)
 
 ## Version 2: GUI
 
