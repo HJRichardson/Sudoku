@@ -22,7 +22,7 @@ The terminal version of the sudoku game has the following features listed in the
 
   ![Sudoku Grid](https://github.com/HJRichardson/Sudoku/blob/main/SudokuSolutions.png?raw=true)
   
-- Ranking: The user can display the ranking of the particular sudoku game: a floating point value which specifies the difficulty of the game, denoted as $r$, based on the number of solutions, $s$, and number of free fields in the grid, $f$, for an $n$ x $n$ grid. The higher the rank, the easier the game. Note that a sudoku game with no solutions is assigned a value of infinite (i.e. no rank). The forumla for the rank, r,  can be seen below:
+- Ranking: The user can display the ranking of the particular sudoku game: a floating point value which specifies the difficulty of the game, denoted as $r$, based on the number of solutions, $s$, and number of free fields in the grid, $f$, for an $n$ x $n$ grid. The higher the rank, the easier the game. Note that a sudoku game with no solutions is assigned a value of infinity (i.e. no rank). The formula for the rank, r,  can be seen below:
 
   $$r = s + \left(1 - \frac{f}{n^{2}}\right)$$
 
