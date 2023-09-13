@@ -13,7 +13,7 @@ Currently, there are two versions of the sudoku game: one which runs entirely th
 The terminal version of the sudoku game has the following features:
 - Manual entry: The user can select whichever sudoku field they would like to set/clear a value for by providing coordinates in the form (row, column) (starting from the top left corner as (1,1)). The program will only allow values which satisfy the standard sudoku rules of the instance of the game (cannot have multiple values in the same row/column/subgrid, and any initially set values provided in the game files cannot be changed). If an invalid move is attempted, the value will not be entered into the grid, and the terminal will output which entries in the grid conflict with the attempted move. The terminal's grid can be seen below:
 
-![Sudoku Grid](https://github.com/HJRichardson/Sudoku/blob/main/SudokuGrid.png?raw=true)
+  ![Sudoku Grid](https://github.com/HJRichardson/Sudoku/blob/main/SudokuGrid.png?raw=true)
 
 - Solver: If the user is struggling to solve the game, they can select an option to solve the game using an automated backtracking algorithm. The algorithm moves from the top left entry to the bottom right entry, trying values for each field. Should there not be a possible value for one of the fields, the algorithm moves backwards and increases one of the previous values. If the algorithm moves past the bottom right entry, then a solution has been found. If the algorithm moves back beyond the first entry in the grid, then there is no solution to be found.
   Additionally, the solver can also be used to find all possible solutions to the sudoku game.
