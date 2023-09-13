@@ -24,7 +24,7 @@ The terminal version of the sudoku game has the following features listed in the
   
 - Ranking: The user can display the ranking of the particular sudoku game: a floating point value greater than 1 which specifies the difficulty of the game, denoted as $r$, based on the number of solutions, $s$, and number of free fields in the grid, $f$, for an $n$ x $n$ grid. The higher the rank, the easier the game. The forumla for the rank, r,  can be seen below:
 
-  $$r = s + \left(1 - \left(f*\frac{1}{n^{2}}\right)\right)$$
+  $$r = s + \left(1 - \frac{f}{n^{2}}\right)$$
 
   Within the formula, the number of solutions $s$ controls the integer part of the ranking, while the number of free fields is used to add on a small value based on how many/few there are. This value can be displayed for the specific sudoku game, or the ranks of all sudoku games within the <code>games</code> folder can be displayed at once by running the main method of <code>Ranker.java</code>.
 - X-Sudoku: The user has the option to play sudoku variation called X-Sudoku. This game follows the standard sudoku rules, however it has the additional requirement that any entries on either of the main diagonals must be unique within the diagonal they are on. To play this variation, the user can load in a sudoku file in <code>games</code> which beings with "x". The solver also works for this variation. To make it the diagonal entries clearer, they are enclosed within square braces. An example of this can be seen below:
