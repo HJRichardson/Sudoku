@@ -26,7 +26,7 @@ The terminal version of the sudoku game has the following features listed in the
 
   $$r = s + \left(1 - \frac{f}{n^{2}}\right)$$
 
-  Within the formula, the number of solutions $s$ controls the integer part of the ranking, while the number of free fields is used to add on a small value based on how many/few there are. This value can be displayed for the specific sudoku game, or the ranks of all sudoku games within the <code>games</code> folder can be displayed at once by running the main method of <code>Ranker.java</code>.
+  Within the formula, the number of solutions $s$ controls the integer part of the ranking, while the number of free fields is used to add on a small value based on how many/few free fields there are in the grid. This value can be displayed for the specific sudoku game, or the ranks of all sudoku games within the <code>games</code> folder can be displayed at once by running the main method of <code>Ranker.java</code>.
 - X-Sudoku: The user has the option to play sudoku variation called X-Sudoku. This game follows the standard sudoku rules, however it has the additional requirement that any entries on either of the main diagonals must be unique within the diagonal they are on. To play this variation, the user can load in a sudoku file in <code>games</code> which beings with "x". The solver also works for this variation. To make it the diagonal entries clearer, they are enclosed within square braces. An example of this can be seen below:
 
   ![Sudoku Grid](https://github.com/HJRichardson/Sudoku/blob/main/XSudokuGrid.png?raw=true)
