@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 public class SudokuFieldAction implements ActionListener{
     
     // Instance variables.
-    private final GameGrid gameGrid;    
+    private final SudokuGame sudokuGame;    
     private final int row;
     private final int col;
 
@@ -22,8 +22,8 @@ public class SudokuFieldAction implements ActionListener{
      * @param row - The row of the grid.
      * @param column - The column of the grid.
      */
-    public SudokuFieldAction(GameGrid gameGrid, int row, int col) {
-        this.gameGrid = gameGrid;
+    public SudokuFieldAction(SudokuGame sudokuGame, int row, int col) {
+        this.sudokuGame = sudokuGame;
         this.row = row;
         this.col = col;
     }
@@ -43,6 +43,7 @@ public class SudokuFieldAction implements ActionListener{
                 return;
             }
             int value = Integer.valueOf(input);
+            GameGrid gameGrid = sudokuGame.getGrid();
             if (value == GameGrid.EMPTY_VAL) {
                 gameGrid.clearField(row, col);
                 actionButton.setText("");

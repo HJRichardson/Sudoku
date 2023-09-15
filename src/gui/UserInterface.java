@@ -12,9 +12,6 @@ public class UserInterface {
      */
     public static void main(String[] args) {
         String path = askForPath();
-        if (path == null) {
-            System.exit(0);
-        }
         SudokuFrame frame = new SudokuFrame(path);
         frame.setVisible(true);
     }
@@ -26,7 +23,7 @@ public class UserInterface {
      *
      * @return A valid sudoku file path.
      */
-    private static String askForPath() {
+    public static String askForPath() {
         while (true) {
             String path = JOptionPane.showInputDialog("Please provide a file path to the Sudoku game file.");
             if (path == null) {
