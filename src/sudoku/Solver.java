@@ -14,6 +14,10 @@ public class Solver {
      * @return Whether the game was solved or not.
      */    
     public static boolean solve(GameGrid gameGrid) {
+        if (gameGrid.countRemainingFields() == 0) {
+            return true;
+        }
+        
         Objects.requireNonNull(gameGrid);
 
         // Begin search at top left of grid (0, 0).

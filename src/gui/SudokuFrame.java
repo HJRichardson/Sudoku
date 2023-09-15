@@ -65,7 +65,7 @@ public class SudokuFrame extends JFrame {
         for (int row = 0; row < GameGrid.GRID_DIM; row++) {
             for (int col = 0; col < GameGrid.GRID_DIM; col++) {
                 JButton button = buttonGrid[row][col];
-                if (gameGrid.isInitial(row, col)) {
+                if (gameGrid.getField(row, col) != GameGrid.EMPTY_VAL) {
                     button.setText(gameGrid.getField(row, col) + "");
                     button.setEnabled(false);
                 } else {
@@ -83,8 +83,15 @@ public class SudokuFrame extends JFrame {
         JMenuItem loadGame = new JMenuItem("Load Game");
         loadGame.addActionListener(new LoadGameAction(this, sudokuGame));
         menu.add(loadGame);
-        menu.add(new JMenuItem("Solve Game"));
-        menu.add(new JMenuItem("Rank Game"));
+
+        JMenuItem solveGame = new JMenuItem("Solve Game");
+        solveGame.addActionListener(new SolveGameAction(this, sudokuGame));
+        menu.add(solveGame);
+
+        JMenuItem rankGame = new JMenuItem("Rank Game");
+        rankGame.addActionListener(new RankGameAction(sudokuGame));
+        menu.add(rankGame);
+
         menuBar.add(menu);
 
         this.setJMenuBar(menuBar);
