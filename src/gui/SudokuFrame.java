@@ -79,9 +79,10 @@ public class SudokuFrame extends JFrame {
     private void createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
+
         JMenuItem loadGame = new JMenuItem("Load Game");
         loadGame.addActionListener(new LoadGameAction(this, sudokuGame));
-        menu.add(new JMenuItem("Load Game"));
+        menu.add(loadGame);
         menu.add(new JMenuItem("Solve Game"));
         menu.add(new JMenuItem("Rank Game"));
         menuBar.add(menu);
