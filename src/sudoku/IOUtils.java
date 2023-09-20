@@ -13,6 +13,10 @@ import java.io.File;
 import java.util.Objects;
 import java.util.HashMap;
 
+/**
+* This class implements utility functions for loading files/folders
+* for sudoku games.
+*/
 public class IOUtils {
 
     /**
@@ -35,9 +39,9 @@ public class IOUtils {
         
         try {     
         	Scanner scanner = new Scanner(fileName);         
-	        for(int row = 0; row < GameGrid.GRID_DIM; row++) {
-	            for(int col = 0; col < GameGrid.GRID_DIM; col++) {
-	                if(!scanner.hasNextInt())
+	        for (int row = 0; row < GameGrid.GRID_DIM; row++) {
+	            for (int col = 0; col < GameGrid.GRID_DIM; col++) {
+	                if (!scanner.hasNextInt())
 	                    throw new RuntimeException("Given Sudoku file has invalid format: " + fileName);
 	
 	                int value = scanner.nextInt();

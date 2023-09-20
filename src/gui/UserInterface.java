@@ -1,10 +1,13 @@
 package gui;
 
-import sudoku.*;
 import javax.swing.JOptionPane;
 import java.io.File;
 import java.util.Objects;
 
+/**
+* This class controls the user interface for the sudoku
+* program.
+*/
 public class UserInterface {
     
     /**
@@ -12,9 +15,30 @@ public class UserInterface {
      */
     public static void main(String[] args) {
         String path = askForPath();
-        SudokuFrame frame = new SudokuFrame(path);
+        SudokuFrame frame = setUpSudokuFrame(path);
         frame.setVisible(true);
     }
+
+    /**
+     * Helper function to set up a Sudoku frame based on
+     * the type of sudoku game.
+     * 
+     * @param path - The file path of the sudoku game.
+     * @return The initialised SudokuFrame instance.
+     */
+    public static SudokuFrame setUpSudokuFrame(String path) {
+        Objects.requireNonNull(path);
+
+        File file = new File(path);
+        String sudokuName = file.getName();
+        SudokuFrame frame;
+        if (sudokuName.startsWith("x")) { // X-Sudoku game.
+            frame = new XSudokuFrame(path);
+        } else { // Regular Sudoku game.
+            frame = new RSudokuFrame(path);
+        }
+        return frame;
+    } 
 
     /**
      * Asks the user for a valid sudoku directory, including
@@ -36,34 +60,13 @@ public class UserInterface {
             }
 
             File file = new File(path);
-            if (file.exists() && file.getName().endsWith(".sd")) {
+            if (file.exists() && file.getName().endsWith(".sd")) { // Valid file.
                 return path;
-            } else if (file.exists()) {
+            } else if (file.exists()) { // Invalid file type.
                 JOptionPane.showMessageDialog(null, "The file you have selected is not a valid sudoku game.");
-            } else {
+            } else { // File doesn't exist.
                 JOptionPane.showMessageDialog(null, "The selected file does not exist.");
             }
         }
-    }
-
-    /**
-     * Helper function to initialise GameGrid instance using file path.
-     * Determines the type of the GameGrid instance based on the file name.
-     *
-     * @param path - The file path of the sudoku file.
-     * @return The initialised GameGrid instance.
-     */
-    public static GameGrid gameGridSetUp(String path) {
-        Objects.requireNonNull(path);
-
-        File file = new File(path);
-        String sudokuName = file.getName();
-        GameGrid gameGrid;
-        if (sudokuName.startsWith("x")) {
-            gameGrid = new XGameGrid(path);
-        } else {
-            gameGrid = new RGameGrid(path);
-        }
-        return gameGrid;
     }
 }

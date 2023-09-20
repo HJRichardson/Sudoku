@@ -3,6 +3,10 @@ package sudoku;
 import java.util.Objects;
 import java.util.ArrayList;
 
+/**
+* This class implements the functionality for solving a sudoku game,
+* finding all possible solutions.
+*/
 public class Solver {
     
     /**
@@ -37,7 +41,7 @@ public class Solver {
 
                 // Attempt the increase: if we do not find a valid value, then clear field
                 // and move backwards to a previously checked field.
-                if(!tryIncrease(gameGrid, col, row)) {
+                if(!increaseValue(gameGrid, col, row)) {
                     gameGrid.clearField(col, row);
                     goBack = true;
                 }
@@ -96,7 +100,7 @@ public class Solver {
 
                 // Attempt the increase: if we do not find a valid value, then clear field
                 // and move backwards to a previously checked field.
-                if(!tryIncrease(gameGrid, col, row)) {
+                if(!increaseValue(gameGrid, col, row)) {
                     gameGrid.clearField(col, row);
                     goBack = true;
                 }
@@ -139,7 +143,7 @@ public class Solver {
      * @param col - The column of the game.
      * @return Whether the field could have its value validly increased.
      */    
-     private static boolean tryIncrease(GameGrid gameGrid, int row, int col) {
+     private static boolean increaseValue(GameGrid gameGrid, int row, int col) {
         int value = gameGrid.getField(row, col);
         for (int newValue = value + 1; newValue <= GameGrid.MAX_VAL; newValue++) {
             if (gameGrid.setField(row, col, newValue, false)) {

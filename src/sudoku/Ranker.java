@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+* This class implements functionality for a ranking system
+* for sudoku games.
+*/
 public class Ranker {
     
     /**

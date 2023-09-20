@@ -6,6 +6,10 @@ import java.util.Objects;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+* This class implements the terminal user interface for the sudoku game,
+* giving options for setting values and solving sudoku games.
+*/
 public class Terminal {
 
     /**
@@ -62,11 +66,11 @@ public class Terminal {
                     return null;
                 }
                 File file = new File(result);
-                if (file.exists() && file.getName().endsWith(".sd")) {
+                if (file.exists() && file.getName().endsWith(".sd")) { // Valid file.
                     return result;
-                } else if (file.exists()) {
+                } else if (file.exists()) { // Invalid file type.
                     System.out.println("The file you have selected is not a valid sudoku game.");
-                } else {
+                } else { // File doesn't exist.
                     System.out.println("The selected file does not exist.");
                 }
             }
@@ -164,9 +168,9 @@ public class Terminal {
         }
         String sudokuName = file.getName();
         GameGrid gameGrid;
-        if (sudokuName.startsWith("x")) {
+        if (sudokuName.startsWith("x")) { // X-Sudoku game.
             gameGrid = new XGameGrid(path);
-        } else {
+        } else { // Regular Sudoku game.
             gameGrid = new RGameGrid(path);
         }
         return gameGrid;
