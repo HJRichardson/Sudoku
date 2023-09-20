@@ -1,5 +1,10 @@
 package sudoku;
 
+/**
+* This class implements the structure for grid entries,
+* containing both the value of the field and whether the
+* field is initial or not.
+*/
 public class Field {
     
     // Field instance variables.

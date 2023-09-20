@@ -1,5 +1,9 @@
 package sudoku;
 
+/**
+* This class creates the structure for a X-Sudoku game,
+* where diagonal entries also matter.
+*/
 public class XGameGrid extends GameGrid {
     
     /**
@@ -39,12 +43,12 @@ public class XGameGrid extends GameGrid {
      * @return If the value is valid in terms of the diagonal(s).
      */
     private boolean checkDiagonal(int row, int col, int value, boolean explanation) {
-        if (row != col && row != GameGrid.GRID_DIM - col - 1) {
+        if (row != col && row != GRID_DIM - col - 1) {
             return false;
         }
 
         if (row == col) {
-            for (int i = 0; i < GameGrid.GRID_DIM; i++) {
+            for (int i = 0; i < GRID_DIM; i++) {
                 if (row != i && grid[i][i].getValue() == value) {
                     if (explanation) {
                         System.out.printf("There is a %d on the diagonal! Located at (%d, %d).\n", value, i+1, i+1);
@@ -53,7 +57,7 @@ public class XGameGrid extends GameGrid {
                 }
             }
         } else {
-            for (int i = 0; i < GameGrid.GRID_DIM; i++) {
+            for (int i = 0; i < GRID_DIM; i++) {
                 if (row != i && grid[i][GRID_DIM-i-1].getValue() == value) {
                     if (explanation) {
                         System.out.printf("There is a %d on the diagonal! Located at (%d, %d).\n", value, i+1, i+1);
@@ -82,6 +86,20 @@ public class XGameGrid extends GameGrid {
     }
 
     /**
+     * Checks whether the position on the grid is on one of the diagonals.
+     * 
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     * @return If the position is on one of the diagonals.
+     */
+    public static boolean onDiagonal(int row, int col) {
+        if (row == col || row == GRID_DIM - col - 1) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Returns a string representation of the grid, with the diagonal entries
      * surrounded by braces to make them stand out..
      * @return A string representation of the grid.
@@ -89,10 +107,10 @@ public class XGameGrid extends GameGrid {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int row = 0; row < grid.length; row++) {
-            for (int col = 0; col < grid[0].length; col++) {
+        for (int row = 0; row < GRID_DIM; row++) {
+            for (int col = 0; col < GRID_DIM; col++) {
                 Field element = this.grid[row][col];
-                if (col == row || row == GameGrid.GRID_DIM - col - 1) {
+                if (onDiagonal(row, col)) {
                     sb.append("[" + element + "]");
                 } else {
                     sb.append(" " + element + " ");
@@ -101,12 +119,12 @@ public class XGameGrid extends GameGrid {
                 if (!element.isInitial()) {
                     sb.append(" ");
                 }
-                if ((col + 1) % SUBGRID_DIM == 0 && (col != grid[0].length - 1)) {
+                if (endOfSubgrid(col)) {
                     sb.append("| ");
                 }
             }
             sb.append("\n");
-            if ((row + 1) % SUBGRID_DIM == 0 && row != grid.length - 1) {
+            if (endOfSubgrid(row)) {
                 sb.append("------------------------------------------------\n");
             }
         }

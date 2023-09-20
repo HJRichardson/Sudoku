@@ -1,5 +1,8 @@
 package sudoku;
 
+/**
+* This class creates the structure for a regular game grid.
+*/
 public class RGameGrid extends GameGrid {
 
     /**

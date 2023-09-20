@@ -1,8 +1,14 @@
 package sudoku;
 
+import java.io.File;
 import java.lang.StringBuilder;
 import java.util.Objects;
 
+/**
+* This class implements the structure of the internal sudoku game grid,
+* containing functionality for checking whether sudoku values
+* are valid within the grid and allowing these values to be set.
+*/
 public abstract class GameGrid {
     
     // Constants for the grid, including dimensions and
@@ -50,6 +56,27 @@ public abstract class GameGrid {
                 this.grid[row][col] = new Field(gameGrid.getField(row, col), gameGrid.isInitial(row, col));
             }
         }
+    }
+
+    /**
+     * Helper function to initialise GameGrid instance using file path.
+     * Determines the type of the GameGrid instance based on the file name.
+     *
+     * @param path - The file path of the sudoku file.
+     * @return The initialised GameGrid instance.
+     */
+    public static GameGrid gameGridSetUp(String path) {
+        Objects.requireNonNull(path);
+
+        File file = new File(path);
+        String sudokuName = file.getName();
+        GameGrid gameGrid;
+        if (sudokuName.startsWith("x")) {
+            gameGrid = new XGameGrid(path);
+        } else {
+            gameGrid = new RGameGrid(path);
+        }
+        return gameGrid;
     }
 
     /**
@@ -242,24 +269,39 @@ public abstract class GameGrid {
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int row = 0; row < grid.length; row++) {
-            for (int col = 0; col < grid[0].length; col++) {
+        for (int row = 0; row < GRID_DIM; row++) {
+            for (int col = 0; col < GRID_DIM; col++) {
                 Field element = this.grid[row][col];
                 sb.append(element);
                 sb.append(" ");
                 if (!element.isInitial()) {
                     sb.append(" ");
                 }
-                if ((col + 1) % SUBGRID_DIM == 0 && (col != grid[0].length - 1)) {
+                if (endOfSubgrid(col)) {
                     sb.append("| ");
                 }
             }
             sb.append("\n");
-            if ((row + 1) % SUBGRID_DIM == 0 && row != grid.length - 1) {
+            if (endOfSubgrid(row)) {
                 sb.append("-------------------------------\n");
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Checks whether the position on the grid is at the end of a subgrid,
+     * but not the final entry (i.e. indices 2 and 5 but not 8).
+     * 
+     * @param row - Row of the grid.
+     * @param col - Column of the grid.
+     * @return If the position is at the end of a subgrid.
+     */
+    public static boolean endOfSubgrid(int position) {
+        if ((position + 1) % SUBGRID_DIM == 0 && position != GRID_DIM - 1) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -269,9 +311,9 @@ public abstract class GameGrid {
      */
     public int countRemainingFields() {
         int numRemainingFields = 0;
-        for (int row = 0; row < GameGrid.GRID_DIM; row++) {
-            for (int col = 0; col < GameGrid.GRID_DIM; col++) {
-                if (this.getField(row, col) == GameGrid.EMPTY_VAL) {
+        for (int row = 0; row < GRID_DIM; row++) {
+            for (int col = 0; col < GRID_DIM; col++) {
+                if (this.getField(row, col) == EMPTY_VAL) {
                     numRemainingFields++;
                 }
             }
