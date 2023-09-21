@@ -51,6 +51,12 @@ The features are the same as the ones above, with some small changes:
 
   This file path may be of the form <code>D:\Users\hj1ri\Documents\Java\Sudoku\games\sudoku2.sd</code>. If either the file does not exist or the file is not of the correct format (i.e. <code>.sd</code> files), then an error message is shown.
 
-- Solve game: The user can click "Solve game" to allow the backtracking algorithm to solve the problem and display the solution. This will disable all the buttons so no more entries can be made:
+- Solve game: The user can click "Solve game" to allow the backtracking algorithm to solve the problem and display the solution. This will disable every button so no more inputs can be made:
+
+  ![Sudoku File Path](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SolveGameGUI.png?raw=true)
+
+  The program will display a message should the sudoku not be solveable.
+
+  
 ## How to Run
 To run, use an IDE of your choice and click to run the main method in either <code>Terminal.java</code> for the terminal version or <code>UserInterface.java</code> in the GUI version. In both versions, you will be asked to provide a file path to the sudoku game you would like to play. Please find the <code>games</code> folder on your computer and copy the directory path to this folder, adding onto the end the sudoku game to play (e.g. <code>D:\Users\hj1ri\Documents\Java\Sudoku\games\sudoku2.sd</code>). This will then load the sudoku game. 
