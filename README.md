@@ -59,7 +59,7 @@ The features are the same as the ones above, with some small changes:
 
 - Rank game: The user can display the rank of the game by clicking "Rank Game". This displays the rank of the initial game to show its difficulty based on the formula in the "Version 1: Terminal" section:
 
-  ![Sudoku File Path](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/RankGameGUI.png?raw=true)
+  ![Sudoku File Path](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/RankGameGraphics.png?raw=true)
 
   
 ## How to Run
