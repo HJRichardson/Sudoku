@@ -41,13 +41,13 @@ The features are the same as the ones above, with some small changes:
 
 - Manual entry: The user can try to set the values of the blue cells, which are entries that are blank. They can be clicked on and a message box pops up, prompting the user to enter a value:
 
-  ![Input Prompt](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/InputPrompt.png?raw=true)
+  ![Input Prompt](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/InputPromptGUI.png?raw=true)
 
   This value is validated against the sudoku rules and, if valid, is put into the grid. If not, an error message is shown. Should the value be valid, the button remains enabled should the user want to change the value, either by entering in the new value or by entering   a <code>0</code> to clear the field.
 
 - Load game: The user has the option to load another sudoku game by clicking "Load game" and entering the file path to the sudoku file:
 
-  ![Sudoku File Path](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SudokuFilePath.png?raw=true)
+  ![Sudoku File Path](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SudokuFilePathGUI.png?raw=true)
 
   This file path may be of the form <code>D:\Users\hj1ri\Documents\Java\Sudoku\games\sudoku2.sd</code>. If either the file does not exist or the file is not of the correct format (i.e. <code>.sd</code> files), then an error message is shown.
 
