@@ -1,7 +1,7 @@
 # READ ME: Sudoku
 
 ## Disclaimer
-This project was based on a series of tutorials by The University of Edinburgh in the course Informatics 1: Object-Oriented Programming. However, unless specifically stated in the files, all code/ideas are my own.
+This project was guided by a series of tutorials by The University of Edinburgh in the course Informatics 1: Object-Oriented Programming. However, unless specifically stated in the files, all code/ideas are my own and they were not 
 
 ## Introduction
 Included in this repository is a sudoku game. The user can load in a sudoku game of their choice (using the files in the <code>games</code> folder) and try to solve it themselves, with the program only allowing inputs which follow the standard sudoku rules.
@@ -22,7 +22,7 @@ The terminal version of the sudoku game has the following features listed in the
 
   ![Sudoku Solutions](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SudokuSolutions.png?raw=true)
   
-- Ranking: The user can display the ranking of the particular sudoku game: a floating point value which specifies the difficulty of the game, denoted as $r$, based on the number of solutions, $s$, and number of free fields in the grid, $f$, for an $n$ x $n$ grid. The higher the rank, the easier the game. Note that a sudoku game with no solutions is assigned a value of infinity (i.e. no rank). The formula for the rank, r, can be seen below:
+- Ranking: The user can display the ranking of the particular sudoku game: a floating point value which specifies the difficulty of the game, denoted as $r$, based on the number of solutions, $s$, and number of free fields in the grid, $f$, for an $n$ x $n$ grid. The higher the rank, the easier the game. Note that a sudoku game with no solutions is assigned a value of infinity (i.e. no rank). The formula for the rank can be seen below:
 
   $$r = s + \left(1 - \frac{f}{n^{2}}\right)$$
 
