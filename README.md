@@ -1,7 +1,7 @@
 # READ ME: Sudoku
 
 ## Disclaimer
-This project was guided by a series of tutorials by The University of Edinburgh in the course Informatics 1: Object-Oriented Programming. However, unless specifically stated in the files, all code/ideas are my own and they were not 
+This project was guided by a series of tutorials by The University of Edinburgh in the course <code>Informatics: Object-Oriented Programming</code>. However, unless specifically stated in the files, all code/ideas are my own.
 
 ## Introduction
 Included in this repository is a sudoku game. The user can load in a sudoku game of their choice (using the files in the <code>games</code> folder) and try to solve it themselves, with the program only allowing inputs which follow the standard sudoku rules.
