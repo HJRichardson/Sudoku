@@ -37,12 +37,20 @@ This sudoku version has a Graphical User Interface (GUI) to make the game more i
 
 ![Sudoku Grid GUI](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SudokuGridGraphics.png?raw=true)
 
-The blue cells are the entries which are blank. They can be clicked on and a message box pops up, prompting the user to enter a value:
+The main features are listed below:
 
-![Input Prompt](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/InputPrompt.png?raw=true)
+- Manual entry: The user can try to set the values of the blue cells, which are entries that are blank. They can be clicked on and a message box pops up, prompting the user to enter a value:
 
-This value is validated against the sudoku rules and, if valid, is put into the grid. If not, an error message is shown:
+  ![Input Prompt](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/InputPrompt.png?raw=true)
 
-![Input Error Message](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/ErrorMessage.png?raw=true)
+  This value is validated against the sudoku rules and, if valid, is put into the grid. If not, an error message is shown:
+
+  ![Input Error Message](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/ErrorMessage.png?raw=true)
+
+- Load game: The user has the option to load another sudoku game by entering the file path to the sudoku file:
+
+  ![Sudoku File Path](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SudokuFilePath.png?raw=true)
+
+  This file path may be of the form <code>D:\Users\hj1ri\Documents\Java\Sudoku\games\sudoku2.sd</code>.
 ## How to Run
 To run, use an IDE of your choice and click to run the main method in either <code>Terminal.java</code> for the terminal version or <code>UserInterface.java</code> in the GUI version. In both versions, you will be asked to provide a file path to the sudoku game you would like to play. Please find the <code>games</code> folder on your computer and copy the directory path to this folder, adding onto the end the sudoku game to play (e.g. <code>D:\Users\hj1ri\Documents\Java\Sudoku\games\sudoku2.sd</code>). This will then load the sudoku game. 
