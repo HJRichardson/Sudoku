@@ -33,7 +33,7 @@ The terminal version of the sudoku game has the following features listed in the
 
 ## Version 2: GUI
 
-This sudoku version has a Graphical User Interface (GUI) to make the game more interactive. Currently, the GUI version contains the feature to allow the user to manually enter or clear fields within a sudoku grid. An image of the interactive grid is shown below.
+This sudoku version has a Graphical User Interface (GUI) to make the game more interactive. The main sudoku frame for this version can be seen below:
 
 ![Sudoku Grid GUI](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SudokuGridGUI.png?raw=true)
 
