@@ -53,7 +53,7 @@ The features are the same as the ones above, with some small changes:
 
 - Solve game: The user can click "Solve game" to allow the backtracking algorithm to solve the problem and display the solution. This will disable every button so no more inputs can be made:
 
-  ![Sudoku File Path](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SolveGameGUI.png?raw=true)
+  ![Sudoku File Path](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SolveGameGraphics.png?raw=true)
 
   The program will display a message should the sudoku not be solveable.
 
