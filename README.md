@@ -35,7 +35,7 @@ The terminal version of the sudoku game has the following features listed in the
 
 This sudoku version has a Graphical User Interface (GUI) to make the game more interactive. The main sudoku frame for this version can be seen below:
 
-![Sudoku Grid GUI](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SudokuGridGU.png?raw=true)
+![Sudoku Grid GUI](https://github.com/HJRichardson/Sudoku/blob/main/screenshots/SudokuGridGUI.png?raw=true)
 
 The blue cells are the entries which are blank. They can be clicked on and a message box pops up, prompting the user to enter a value:
 
